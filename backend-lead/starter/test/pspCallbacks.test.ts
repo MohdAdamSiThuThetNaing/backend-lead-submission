@@ -159,7 +159,7 @@ describe('POST /psp/callbacks', () => {
     expect(res.body.error).toBe('unknown_psp_ref');
   });
 
-  // My decision for the brief's open question (see DECISIONS.md section 5):
+  // My decision for the brief's open question (see "Callback behaviour" in DECISIONS.md):
   // never credit an amount we didn't ask for. Keep the deposit Pending, record
   // what the PSP claimed, flag it, and answer 202 so the PSP stops retrying.
   it('does not credit on amount mismatch, keeps it Pending and flags it for review', async () => {

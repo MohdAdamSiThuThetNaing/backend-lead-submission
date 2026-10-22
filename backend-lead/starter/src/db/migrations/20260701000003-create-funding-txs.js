@@ -8,7 +8,7 @@
  *   - deposits always carry a psp_ref (otherwise a callback can never match)
  *   - only deposits carry a turnover multiplier
  *   - settled_at is set iff the tx has left Pending (DB backstop for the
- *     Pending -> Completed | Failed state machine in src/domain/fundingTxStateMachine.ts)
+ *     Pending -> Completed | Failed state machine in src/services/fundingStateMachine.ts)
  *
  * CHECK constraints instead of Postgres ENUMs: adding a status later is a
  * constraint swap inside a transaction; ALTER TYPE ... ADD VALUE is not.
