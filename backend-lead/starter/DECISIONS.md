@@ -1,6 +1,6 @@
 # Decisions
 
-Time spent: about 2 hours in total (code, tests and both notes). A bit over
+Time spent: about 2.5 hours in total (code, tests and both notes). A bit over
 the budget, mostly because of the flaky test issue described below.
 
 `npm test` runs the whole suite against a real Postgres. The four tests the
