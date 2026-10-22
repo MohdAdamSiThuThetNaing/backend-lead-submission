@@ -29,13 +29,20 @@ module.exports = {
       ALTER TABLE wallet_txs
         ADD CONSTRAINT wallet_txs_kind_chk          CHECK (kind IN ('deposit', 'wager', 'withdrawal')),
         ADD CONSTRAINT wallet_txs_amount_chk        CHECK (amount <> 0),
+        -- Deposits credit, wagers and withdrawals debit. A flipped sign would
+        -- silently double an error on reconciliation, so the DB refuses it.
+        ADD CONSTRAINT wallet_txs_sign_chk          CHECK ((kind = 'deposit') = (amount > 0)),
         ADD CONSTRAINT wallet_txs_balance_after_chk CHECK (balance_after >= 0);
 
       CREATE UNIQUE INDEX wallet_txs_funding_kind_uq
         ON wallet_txs (funding_tx_id, kind)
         WHERE funding_tx_id IS NOT NULL;
 
-      CREATE INDEX wallet_txs_wallet_created_idx ON wallet_txs (wallet_id, created_at);
+      -- Total order of ledger entries. created_at has millisecond resolution and
+      -- can tie under load; seq is assigned while the wallet row lock is held,
+      -- so per wallet it is exactly the order balances were applied in.
+      ALTER TABLE wallet_txs ADD COLUMN seq BIGINT GENERATED ALWAYS AS IDENTITY;
+      CREATE UNIQUE INDEX wallet_txs_wallet_seq_uq ON wallet_txs (wallet_id, seq);
 
       CREATE FUNCTION wallet_txs_append_only() RETURNS trigger AS $$
       BEGIN

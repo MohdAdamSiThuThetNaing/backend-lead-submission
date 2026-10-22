@@ -22,6 +22,8 @@ export class FundingTx extends Model {
   declare amount: string;
   /** Amount the PSP reported in its callback; null until settled. Audit only. */
   declare pspAmount: string | null;
+  /** Why automated settlement was refused (e.g. 'amount_mismatch'). Flagged txs are never auto-settled. */
+  declare reviewReason: string | null;
   /** Deposits only; withdrawals are always 0. */
   declare turnoverMultiplier: number;
   /** Our opaque reference echoed by the PSP. Unique: the idempotency key. */
@@ -50,6 +52,7 @@ export function initFundingTx(sequelize: Sequelize): void {
       },
       amount: { type: DataTypes.DECIMAL(36, 18), allowNull: false },
       pspAmount: { type: DataTypes.DECIMAL(36, 18), allowNull: true },
+      reviewReason: { type: DataTypes.STRING(64), allowNull: true },
       turnoverMultiplier: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
       pspRef: { type: DataTypes.STRING(64), allowNull: true, unique: true },
       settledAt: { type: DataTypes.DATE, allowNull: true },
