@@ -23,13 +23,18 @@ TypeScript, Express, Sequelize, PostgreSQL, Jest. Money is `DECIMAL(36,18)` in P
 Requires Node 20+ and Docker. Docker only runs Postgres; the API and tests run with npm.
 
 ```bash
+cd backend-lead/starter
 cp .env.example .env
 npm install
-npm run db:up        # starts Postgres on localhost:5439 (dev + test databases)
-npm run db:migrate   # migrates the dev database
-npm test             # migrates the test database and runs the test suite
-npm run dev          # starts the API on :3000
+npm run db:up
+npm run db:migrate
+npm test
 ```
+
+- `npm run db:up` starts Postgres on localhost:5439 with the dev and test databases.
+- `npm run db:migrate` migrates the dev database.
+- `npm test` migrates the test database and runs the whole suite (about 5 seconds).
+- `npm run dev` starts the API on :3000 if you want to call it by hand.
 
 If port 5439 clashes with something on your machine, change it in `docker-compose.yml` and `.env`.
 
@@ -62,10 +67,8 @@ If port 5439 clashes with something on your machine, change it in `docker-compos
 ## Troubleshooting
 
 - `ECONNRESET` right after `npm run db:up`: Postgres is still starting. Wait a few seconds and run the command again.
-- `Cannot find module '../src/db/models'`: `src/db/models/index.ts` is missing. Run `git restore src/db/models`.
 - `column "..." does not exist`: the test database has an older schema. Run `npx cross-env NODE_ENV=test sequelize-cli db:migrate:undo:all` and then `npm test`.
 - `docker compose down` removes the container and its data. Run `npm run db:up` and `npm run db:migrate` again after it.
-- On zsh, paste commands without the `#` comments, or run `setopt interactivecomments` first.
 
 ## Layout
 
@@ -103,6 +106,7 @@ src/
     `-- withdrawalService.ts     * turnover lock
 test/
 |-- server.ts                    * test server bound to 127.0.0.1
+|-- tsconfig.json                * editor/type-check config for tests (adds Jest types)
 |-- helpers.ts                   * createMember, fundWallet, ledger check
 |-- members.test.ts              # from the starter
 |-- deposits.test.ts             *
