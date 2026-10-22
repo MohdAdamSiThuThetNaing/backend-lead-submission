@@ -1,16 +1,22 @@
 # 99Tech Engineering Leadership Challenges
 
-Take-home challenges for our engineering leadership roles. Your recruiter told
-you which one is yours. Open that folder and read its readme.
+**This copy is my Backend Lead submission (Adam Si Thu Thet Naing).** Start with
+[`backend-lead/starter/README.md`](backend-lead/starter/README.md): it says what
+I built, how to run it, and which test covers each requirement. My reasoning is
+in [`DECISIONS.md`](backend-lead/starter/DECISIONS.md) and Part B is in
+[`DESIGN-PSP.md`](backend-lead/starter/DESIGN-PSP.md).
 
-| Role                                 | Folder                                             | Time budget |
-| ------------------------------------ | -------------------------------------------------- | ----------- |
-| CTO / VP of Engineering              | [`cto-vp-engineering/`](cto-vp-engineering/)       | ~4 hours    |
-| Engineering Manager / Senior Manager | [`engineering-manager/`](engineering-manager/)     | ~4 hours    |
-| Backend Lead                         | [`backend-lead/`](backend-lead/)                   | ~4 hours    |
+| Role         | Folder                           | Time budget |
+| ------------ | -------------------------------- | ----------- |
+| Backend Lead | [`backend-lead/`](backend-lead/) | ~4 hours    |
 
-Do only your own folder. The others are visible because this repo is public,
-not because we want more from you.
+I removed the CTO / VP of Engineering and Engineering Manager folders from my
+copy because I only did the Backend Lead challenge. They are still in the
+commit history.
+
+---
+
+The rest of this file is the original readme from 99Tech.
 
 **Please do not open a pull request against this repository.** A pull request
 would publish your work where every other candidate can read it, and we do not
