@@ -14,3 +14,17 @@ export function dec(value: string | number | BigNumber): BigNumber {
 }
 
 export const ZERO = dec(0);
+
+/** Same scale as the DB column, so values written and values read back compare as equal strings. */
+export const MONEY_SCALE = 18;
+
+/**
+ * Accepted wire format for amounts: plain decimal, no sign, no exponent, no
+ * whitespace, at most 18 integer digits and 18 fractional digits (fits
+ * DECIMAL(36,18) exactly, so nothing is ever rounded on the way in).
+ */
+export const MONEY_PATTERN = /^(0|[1-9]\d{0,17})(\.\d{1,18})?$/;
+
+export function toMoneyString(value: BigNumber): string {
+  return value.toFixed(MONEY_SCALE);
+}
