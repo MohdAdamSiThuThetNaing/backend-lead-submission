@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 import { sequelize } from '../db/sequelize';
 import { FundingTx, Wallet } from '../db/models';
-import { assertTransition } from '../domain/fundingTxStateMachine';
+import { assertTransition } from './fundingStateMachine';
 import { HttpError } from '../lib/errors';
 import { dec, toMoneyString } from '../lib/money';
 import { lockWallet, postLedgerEntry } from './ledger';
